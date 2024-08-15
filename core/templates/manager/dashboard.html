@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Manager Dashboard</title>
+{% endblock title %}
+
+{% block body %}
+    <div class="dashboard">
+        <h1>Manager Dashboard</h1>
+        <div class="recent-complaints">
+            <h2>Recent Complaints</h2>
+            <ul>
+                {% for complaint in recent_complaints %}
+                <li>{{ complaint.complaint_text }} - {{ complaint.student.user.username }} ({{ complaint.date_filed }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="available-rooms">
+            <h2>Available Rooms</h2>
+            <ul>
+                {% for room in available_rooms %}
+                <li>{{ room.room_number }} - {{ room.get_room_type_display }} ({{ room.space_free }} beds available)</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="links">
+            <a href="{% url 'manage_complaints' %}" class="btn">Manage Complaints</a>
+            <a href="{% url 'allocate_rooms' %}" class="btn">Allocate Rooms</a>
+            <a href="{% url 'view_payments' %}" class="btn">View Payments</a>
+        </div>
+    </div>
+{% endblock body %}

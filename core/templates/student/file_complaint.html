@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>File Complaint</title>
+{% endblock title %}
+
+{% block body %}
+    <h1>File a Complaint</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="complaint_text">Complaint:</label>
+        <textarea id="complaint_text" name="complaint_text" required></textarea>
+        <button type="submit">Submit Complaint</button>
+    </form>
+    <a href="{% url 'student_dashboard' %}">Back to Dashboard</a>
+{% endblock body %}

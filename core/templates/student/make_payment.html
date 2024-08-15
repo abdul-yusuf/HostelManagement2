@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Manage Users</title>
+{% endblock title %}
+
+{% block body %}
+    <h1>Make Payment</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+        <button type="submit">Pay Now</button>
+    </form>
+    <a href="{% url 'student_dashboard' %}">Back to Dashboard</a>
+{% endblock body %}

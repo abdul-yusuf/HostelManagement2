@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    {% block title %}{% endblock title %}
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <a href="{% url 'manage_users' %}">Manage Users</a>
+        <a href="{% url 'manage_rooms' %}">Manage Rooms</a>
+        <a href="{% url 'view_reports' %}">View Reports</a>
+    </div>
+
+    <div class="container">
+        {% block body %}
+        {% endblock body %}
+    </div>
+</body>
+</html>

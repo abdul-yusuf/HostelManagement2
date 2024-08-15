@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+        <title>Admin Dashboard</title>
+{% endblock title %}
+
+{% block body %}
+    <div class="dashboard">
+        <h1>Admin Dashboard</h1>
+        <div class="stats">
+            <ul>
+                <li>Total Rooms: {{ total_rooms }}</li>
+                <li>Total Students: {{ total_students }}</li>
+                <li>Total Payments: {{ total_payments.amount__sum }}</li>
+            </ul>
+        </div>
+        <div class="links">
+            <a href="{% url 'manage_users' %}" class="btn">Manage Users</a>
+            <a href="{% url 'manage_rooms' %}" class="btn">Manage Rooms</a>
+            <a href="{% url 'view_reports' %}" class="btn">View Reports</a>
+        </div>
+    </div>
+{% endblock body %}

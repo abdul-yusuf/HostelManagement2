@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Student Dashboard</title>
+{% endblock title %}
+
+{% block body %}
+    <div class="dashboard">
+        <h1>Welcome, {{ user.username }}</h1>
+        <div class="room-details">
+            <h2>Room Details</h2>
+            <p>Room Number: {{ user.studentprofile.room.room_number }}</p>
+            <p>Room Type: {{ user.studentprofile.room.get_room_type_display }}</p>
+        </div>
+        <div class="recent-payments">
+            <h2>Recent Payments</h2>
+            <ul>
+                {% for payment in payments %}
+                <li>Amount: {{ payment.amount }} | Date: {{ payment.date_paid }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="recent-complaints">
+            <h2>Recent Complaints</h2>
+            <ul>
+                {% for complaint in complaints %}
+                <li>{{ complaint.complaint_text }} - Status: {{ complaint.get_status_display }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="announcements">
+            <h2>Announcements</h2>
+            <ul>
+                {% for announcement in announcements %}
+                <li>{{ announcement.title }} - {{ announcement.date_posted }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="links">
+            <a href="{% url 'make_payment' %}" class="btn">Make Payment</a>
+            <a href="{% url 'file_complaint' %}" class="btn">File a Complaint</a>
+            <a href="{% url 'view_announcements' %}" class="btn">View All Announcements</a>
+        </div>
+    </div>
+{% endblock body %}

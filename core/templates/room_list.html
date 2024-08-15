@@ -1,0 +1,27 @@
+    {% extends 'core/base.html' %}
+
+    {% block title %}
+    <title>Room List</title>
+    {% endblock title %}
+
+    {% block body %}
+    <h1>Available Rooms</h1>
+    <table>
+        <tr>
+            <th>Room Number</th>
+            <th>Type</th>
+            <th>Capacity</th>
+            <th>Occupied</th>
+            <th>Fee</th>
+        </tr>
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.room_number }}</td>
+            <td>{{ room.get_room_type_display }}</td>
+            <td>{{ room.capacity }}</td>
+            <td>{{ room.occupied }}</td>
+            <td>{{ room.fee }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endblock body %}
