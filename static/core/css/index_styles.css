@@ -1,0 +1,146 @@
+/* Hero Section */
+.hero {
+    background-image: url('../images/hostel-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.hero-content .btn-primary {
+    padding: 15px 30px;
+    background-color: #ff5733;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.hero-content .btn-primary:hover {
+    background-color: #c70039;
+}
+
+/* Features Section */
+.features {
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Testimonials Section */
+.testimonials {
+    background-color: #333;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+blockquote {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 18px;
+}
+
+/* Call to Action Section */
+.cta {
+    background-color: #ff5733;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.cta h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.cta .btn-secondary {
+    padding: 15px 30px;
+    background-color: white;
+    color: #ff5733;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.cta .btn-secondary:hover {
+    background-color: #fff0f0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .features .row, .testimonials .row {
+        flex-direction: column;
+    }
+
+    .col {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .cta h2 {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 24px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-content .btn-primary, .cta .btn-secondary {
+        width: 100%;
+        padding: 15px 0;
+    }
+}

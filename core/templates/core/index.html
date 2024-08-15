@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Hostel Management System</title>
+{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/css/index_styles.css' %}">
+{% endblock style %}
+
+{% block body %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to the Hostel Management System</h1>
+            <p>Manage your hostel with ease and efficiency</p>
+            <a href="{% url 'login' %}" class="btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Our Features</h2>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h3>Easy Room Management</h3>
+                        <p>Allocate and manage rooms with just a few clicks.</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h3>Payment Tracking</h3>
+                        <p>Keep track of student payments and generate reports.</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h3>Complaint Handling</h3>
+                        <p>Resolve student complaints efficiently with our integrated system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="row">
+                <div class="col">
+                    <blockquote>
+                        "This system has revolutionized how we manage our hostel. Highly recommend!" 
+                        <br> - Hostel Manager
+                    </blockquote>
+                </div>
+                <div class="col">
+                    <blockquote>
+                        "Payments and room allocations have never been easier. A fantastic tool!"
+                        <br> - University Administrator
+                    </blockquote>
+                </div>
+                <div class="col">
+                    <blockquote>
+                        "Filing complaints and keeping up with announcements is a breeze!"
+                        <br> - Student
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to get started?</h2>
+            <a href="{% url 'signup' %}" class="btn-secondary">Create an Account</a>
+        </div>
+    </section>
+{% endblock body %}

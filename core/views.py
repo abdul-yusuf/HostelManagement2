@@ -10,29 +10,33 @@ def room_list(request):
     return render(request, 'core/room_list.html', {'rooms': rooms})
 
 
+def home_page(request):
+    return render(request, 'core/index.html')
+
+
 # Admin Dashboard
 def admin_dashboard(request):
-    if request.user.role != 'admin':
-        return redirect('login')  # Redirect non-admin users
-    total_rooms = Room.objects.count()
-    total_students = User.objects.filter(role='student').count()
-    total_payments = Payment.objects.aggregate(Sum('amount'))
-    context = {
-        'total_rooms': total_rooms,
-        'total_students': total_students,
-        'total_payments': total_payments,
-    }
+    if request.user.role == 'admin':
+        # return redirect('login')  # Redirect non-admin users
+        total_rooms = Room.objects.count()
+        total_students = User.objects.filter(role='student').count()
+        total_payments = Payment.objects.aggregate(Sum('amount'))
+        context = {
+            'total_rooms': total_rooms,
+            'total_students': total_students,
+            'total_payments': total_payments,
+        }
 
-    elif request.user.role != 'student':
-        return redirect('login')
-    announcements = Announcement.objects.all().order_by('-date_posted')[:5]
-    payments = Payment.objects.filter(student=request.user.studentprofile)
-    complaints = Complaint.objects.filter(student=request.user.studentprofile).order_by('-date_filed')[:5]
-    context = {
-        'announcements': announcements,
-        'payments': payments,
-        'complaints': complaints,
-    }
+    elif request.user.role == 'student':
+            # return redirect('login')
+        announcements = Announcement.objects.all().order_by('-date_posted')[:5]
+        payments = Payment.objects.filter(student=request.user.studentprofile)
+        complaints = Complaint.objects.filter(student=request.user.studentprofile).order_by('-date_filed')[:5]
+        context = {
+            'announcements': announcements,
+            'payments': payments,
+            'complaints': complaints,
+        }
     return render(request, 'admin/dashboard.html', context)
 
 
