@@ -5,21 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     {% block title %}{% endblock title %}
     {% block style %}{% endblock style %}
 
 </head>
 <body>
-    <div class="navbar">
-        <a href="{% url 'dashboard' %}">Dashboard</a>
-        <a href="{% url 'manage_users' %}">Manage Users</a>
-        <a href="{% url 'manage_rooms' %}">Manage Rooms</a>
-        <a href="{% url 'view_reports' %}">View Reports</a>
-    </div>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{% url 'home' %}">Hostel Management</a>
+            </div>
+            <div class="navbar-toggle" id="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container">
         {% block body %}
         {% endblock body %}
     </div>
+    <script>
+        // Get the elements
+        const navbarToggle = document.getElementById('navbar-toggle');
+        const navbarMenu = document.getElementById('navbar-menu');
+
+        // Add click event listener to toggle menu visibility
+        navbarToggle.addEventListener('click', function () {
+            navbarMenu.classList.toggle('active');
+        });
+    </script>
+
 </body>
 </html>

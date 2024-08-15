@@ -1,90 +1,105 @@
+/* Base Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* Container for spacing */
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
 /* Hero Section */
 .hero {
-    background-image: url('../images/hostel-hero.jpg');
-    background-size: cover;
-    background-position: center;
+    background-color: #0077b6;
     color: white;
     text-align: center;
     padding: 100px 20px;
+    background-image: url('../images/hero-background.jpg');
+    background-size: cover;
+    background-blend-mode: overlay;
 }
 
 .hero-content h1 {
     font-size: 48px;
     margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .hero-content p {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 40px;
 }
 
 .hero-content .btn-primary {
     padding: 15px 30px;
-    background-color: #ff5733;
-    color: white;
+    background-color: #ffdd57;
+    color: #333;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 50px;
     font-size: 18px;
     transition: background-color 0.3s ease;
 }
 
 .hero-content .btn-primary:hover {
-    background-color: #c70039;
+    background-color: #ffc300;
 }
 
 /* Features Section */
 .features {
-    background-color: #f4f4f4;
-    padding: 50px 20px;
+    background-color: #fff;
+    padding: 60px 20px;
 }
 
 .features h2 {
     text-align: center;
-    margin-bottom: 30px;
     font-size: 36px;
+    margin-bottom: 50px;
 }
 
-.card {
-    background-color: white;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.card h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-/* Testimonials Section */
-.testimonials {
-    background-color: #333;
-    color: white;
-    padding: 50px 20px;
+.feature-box {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
 }
 
-.testimonials h2 {
-    font-size: 36px;
-    margin-bottom: 30px;
+.feature-box:hover {
+    transform: translateY(-5px);
 }
 
-blockquote {
-    background-color: #444;
-    padding: 20px;
-    border-radius: 5px;
+.feature-box i {
+    font-size: 40px;
+    color: #0077b6;
     margin-bottom: 20px;
-    font-style: italic;
-    font-size: 18px;
+}
+
+.feature-box h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.feature-box p {
+    font-size: 16px;
+    color: #666;
 }
 
 /* Call to Action Section */
 .cta {
-    background-color: #ff5733;
+    background-color: #0077b6;
     color: white;
     text-align: center;
-    padding: 50px 20px;
+    padding: 60px 20px;
 }
 
 .cta h2 {
@@ -95,15 +110,15 @@ blockquote {
 .cta .btn-secondary {
     padding: 15px 30px;
     background-color: white;
-    color: #ff5733;
+    color: #0077b6;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 50px;
     font-size: 18px;
     transition: background-color 0.3s ease;
 }
 
 .cta .btn-secondary:hover {
-    background-color: #fff0f0;
+    background-color: #e0e0e0;
 }
 
 /* Responsive Design */
@@ -113,16 +128,11 @@ blockquote {
     }
 
     .hero-content p {
-        font-size: 16px;
+        font-size: 18px;
     }
 
-    .features .row, .testimonials .row {
-        flex-direction: column;
-    }
-
-    .col {
-        width: 100%;
-        margin-bottom: 20px;
+    .feature-box {
+        margin-bottom: 30px;
     }
 
     .cta h2 {
@@ -136,10 +146,10 @@ blockquote {
     }
 
     .hero-content p {
-        font-size: 14px;
+        font-size: 16px;
     }
 
-    .hero-content .btn-primary, .cta .btn-secondary {
+    .btn-primary, .btn-secondary {
         width: 100%;
         padding: 15px 0;
     }
