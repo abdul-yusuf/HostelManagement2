@@ -1,0 +1,91 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>View Complaint</title>
+{% endblock title %}
+
+{% block body %}
+<style>
+
+/* Button Styles */
+.btn-primary {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #0077b6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #005f99;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-right: 5px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-success {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-right: 5px;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+</style>
+<div class="view-complaint-container">
+    <div class="view-complaint-box">
+        <h2>Complaint Details</h2>
+        <div class="complaint-details">
+            <p><strong>Complaint ID:</strong> {{ complaint.id }}</p>
+            <p><strong>Title:</strong> {{ complaint.complaint_text }}</p>
+            <p><strong>Date:</strong> {{ complaint.date_filed }}</p>
+<!--            <p><strong>Description:</strong></p>-->
+
+            <p><strong>Status:</strong> {{ complaint.get_status_display }}</p>
+        </div>
+        <div class="actions">
+            <a href="{% url 'resolve_complaint' complaint.id %}" class="btn btn-success">Resolve</a>
+            <a href="{% url 'manage_complaints' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock body %}

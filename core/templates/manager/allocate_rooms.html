@@ -1,0 +1,139 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Allocate Rooms</title>
+{% endblock title %}
+
+{% block body %}
+<style>
+    /* Container for room allocation */
+.allocate-rooms-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.allocate-rooms-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0077b6;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Button Styles */
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #0077b6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #005f99;
+}
+
+/* Message Styles */
+.messages {
+    margin-top: 20px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.message.success {
+    background-color: #28a745; /* Green for success */
+}
+
+.message.error {
+    background-color: #dc3545; /* Red for errors */
+}
+
+.message.warning {
+    background-color: #ffc107; /* Yellow for warnings */
+}
+
+.message.info {
+    background-color: #17a2b8; /* Blue for informational messages */
+}
+
+</style>
+<div class="allocate-rooms-container">
+    <div class="allocate-rooms-box">
+        <h2>Allocate a Room</h2>
+        <form method="post" action="{% url 'allocate_rooms' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="student">Select Student:</label>
+                <select id="student" name="student" required>
+                    <option value="">-- Choose a Student --</option>
+                    {% for student in students %}
+                        <option value="{{ student.id }}">{{ student.full_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="room">Select Room:</label>
+                <select id="room" name="room" required>
+                    <option value="">-- Choose a Room --</option>
+                    {% for room in rooms %}
+                        <option value="{{ room.id }}">{{ room.room_number }} ({{ room.room_type }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Allocate Room</button>
+        </form>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

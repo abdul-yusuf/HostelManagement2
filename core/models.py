@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group
+from django.db.models import F, ExpressionWrapper, BooleanField, When, Case, Value
 
 
 class User(AbstractUser):
@@ -28,6 +29,24 @@ class User(AbstractUser):
     )
 
 
+class RoomManager(models.Manager):
+    def occupied_rooms(self):
+        return self.annotate(
+            is_occupied=ExpressionWrapper(
+                F('capacity') - F('occupied') == 0,
+                output_field=BooleanField()
+            )
+        ).filter(is_occupied=True)
+
+    def not_occupied_rooms(self):
+        return self.annotate(
+            is_not_occupied=Case(
+                When(capacity__gt=F('occupied'), then=Value(True)),
+                default=Value(False),
+                output_field=BooleanField()
+            )
+        ).filter(is_not_occupied=True)
+
 class Room(models.Model):
     ROOM_TYPES = (
         ('single', 'Single'),
@@ -40,6 +59,8 @@ class Room(models.Model):
     occupied = models.IntegerField(default=0)
     fee = models.DecimalField(max_digits=8, decimal_places=2)
 
+    objects = RoomManager()
+
     @property
     def status(self):
         # try:
@@ -50,17 +71,22 @@ class Room(models.Model):
         #     return 'not occupied'
         return 'not occupied'
 
+    @property
+    def space(self):
+        return self.capacity-self.occupied
+
 class StudentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='studentprofile')
     room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
     date_joined = models.DateField(auto_now_add=True)
 
 
 class Payment(models.Model):
-    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, related_name='payment')
     amount = models.DecimalField(max_digits=8, decimal_places=2)
+    is_payed = models.BooleanField(default=False)
     date_paid = models.DateField(auto_now_add=True)
-    receipt_number = models.CharField(max_length=20, unique=True)
+    receipt_number = models.CharField(max_length=20)
 
 
 class Complaint(models.Model):

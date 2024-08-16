@@ -19,7 +19,7 @@
             <h2>Available Rooms</h2>
             <ul>
                 {% for room in available_rooms %}
-                <li>{{ room.room_number }} - {{ room.get_room_type_display }} ({{ room.space_free }} beds available)</li>
+                <li>{{ room.room_number }} - {{ room.get_room_type_display }} ({{ room.space }} beds available)</li>
                 {% endfor %}
             </ul>
         </div>

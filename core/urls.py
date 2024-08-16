@@ -19,6 +19,8 @@ urlpatterns = [
     # Hostel Manager URLs
     # path('manager/dashboard/', views.manager_dashboard, name='manager_dashboard'),
     path('manager/manage-complaints/', views.manage_complaints, name='manage_complaints'),
+    path('manager/complaints/<int:id>/', views.view_detail_complaint, name='view_complaint'),
+    path('manager/complaints/resolve/<int:id>/', views.resolve_complaint, name='resolve_complaint'),
     path('manager/allocate-rooms/', views.allocate_rooms, name='allocate_rooms'),
     path('manager/view-payments/', views.view_payments, name='view_payments'),
 
@@ -27,4 +29,5 @@ urlpatterns = [
     path('student/make-payment/', views.make_payment, name='make_payment'),
     path('student/file-complaint/', views.file_complaint, name='file_complaint'),
     path('student/view-announcements/', views.view_announcements, name='view_announcements'),
+    path('student/bed-space/', views.book_space_view, name='space_view'),
 ]
