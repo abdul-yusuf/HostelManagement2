@@ -145,10 +145,20 @@ def allocate_rooms(request):
     if request.user.role != 'manager':
         return redirect('login')
     rooms = Room.objects.filter(occupied__lt=F('capacity'))
-    students_without_rooms = User.objects.filter(role='student', studentprofile__room__isnull=True)
+    students_without_rooms = StudentProfile.objects.filter(room=None)
+    if request.method == 'POST':
+        try:
+            student = StudentProfile.objects.get(id=request.POST.get('student'))
+            room = Room.objects.get(id=request.POST.get('room'))
+            student.room = room
+            student.save()
+            return redirect(reverse('dashboard'))
+        except Exception as e:
+            print(e)
+            pass
     context = {
         'rooms': rooms,
-        'students_without_rooms': students_without_rooms,
+        'students': students_without_rooms,
     }
     return render(request, 'manager/allocate_rooms.html', context)
 
@@ -180,10 +190,28 @@ def student_dashboard(request):
 def make_payment(request):
     if request.user.role != 'student':
         return redirect('login')
+    payments = Payment.objects.filter(student=request.user.studentprofile, is_payed=False)
+
+    try:
+        context = {
+            'payment': payments[0]
+        }
+    except Exception as e:
+        print(e)
+        context = {
+            'payment': payments
+        }
+
     if request.method == 'POST':
         # Handle payment logic here
-        pass
-    return render(request, 'student/make_payment.html')
+        print(payments, payments[0].is_payed)
+        payment = Payment.objects.get(id=payments[0].id)
+        payment.is_payed = True
+        payment.save()
+        return redirect(reverse('dashboard'))
+        # print(payments,payments[0].is_payed, dir(payments[0]))
+
+    return render(request, 'student/make_payment.html', context=context)
 
 
 # File Complaint

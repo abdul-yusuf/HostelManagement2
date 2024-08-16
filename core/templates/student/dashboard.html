@@ -37,7 +37,12 @@
             </ul>
         </div>
         <div class="links">
-            <a href="{% url 'make_payment' %}" class="btn">Make Payment</a>
+            {% for pay in payments %}
+                {% if not pay.is_payed  %}
+                    <a href="{% url 'make_payment' %}" class="btn">Make Payment</a>
+                {% endif  %}
+            {% endfor  %}
+
             <a href="{% url 'file_complaint' %}" class="btn">File a Complaint</a>
             <a href="{% url 'view_announcements' %}" class="btn">View All Announcements</a>
         </div>
