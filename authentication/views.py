@@ -34,16 +34,15 @@ def login_view(request):
             pass
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
+            # email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, email=email, password=raw_password)
-            print("checking to find update_to_cart_redirect in sessions")
-            # if "update_to_cart_redirect" in request.session:
-
+            user = authenticate(request, username=username,password=raw_password)
+            print(next)
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Logged in Successfully')
                 return redirect(reverse(next))
+
     return render(request, 'registration/login.html', {'form': form})
 
 
@@ -77,4 +76,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, 'Logout Successfull')
-    return redirect('store')
+    return redirect('home')

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "core",
+    "authentication",
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'core.User'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGIN_URL = '/login/'

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, F
 from django.shortcuts import render, redirect
 from .models import *
@@ -15,7 +16,9 @@ def home_page(request):
 
 
 # Admin Dashboard
+@login_required
 def admin_dashboard(request):
+    # print(request.user.role)
     if request.user.role == 'admin':
         # return redirect('login')  # Redirect non-admin users
         total_rooms = Room.objects.count()
@@ -26,6 +29,7 @@ def admin_dashboard(request):
             'total_students': total_students,
             'total_payments': total_payments,
         }
+        return render(request, 'admin/dashboard.html', context)
 
     elif request.user.role == 'student':
             # return redirect('login')
@@ -37,7 +41,16 @@ def admin_dashboard(request):
             'payments': payments,
             'complaints': complaints,
         }
-    return render(request, 'admin/dashboard.html', context)
+        return render(request, 'student/dashboard.html', context)
+    elif request.user.role == 'manager':
+        recent_complaints = Complaint.objects.filter(status='pending').order_by('-date_filed')[:5]
+        available_rooms = Room.objects.filter(occupied__lt=F('capacity'))
+        context = {
+            'recent_complaints': recent_complaints,
+            'available_rooms': available_rooms,
+        }
+    # print(context)
+    return render(request, 'core/index.html')
 
 
 # Manage Users
@@ -138,7 +151,7 @@ def file_complaint(request):
     if request.method == 'POST':
         complaint_text = request.POST.get('complaint_text')
         Complaint.objects.create(student=request.user.studentprofile, complaint_text=complaint_text)
-        return redirect('student_dashboard')
+        return redirect('dashboard')
     return render(request, 'student/file_complaint.html')
 
 

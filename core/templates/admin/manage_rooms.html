@@ -1,0 +1,145 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Manage Rooms</title>
+{% endblock title %}
+
+{% block body %}
+<style>
+
+/* Container for managing rooms */
+.manage-rooms-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.manage-rooms-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0077b6;
+}
+
+/* Table Styles */
+.rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.rooms-table th,
+.rooms-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.rooms-table th {
+    background-color: #0077b6;
+    color: white;
+}
+
+.rooms-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styles */
+.btn-primary {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #0077b6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #005f99;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-right: 5px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+</style>
+<div class="manage-rooms-container">
+    <div class="manage-rooms-box">
+        <h2>Manage Rooms</h2>
+        <a href="" class="btn btn-primary">Add New Room</a>
+        {% if rooms %}
+        <table class="rooms-table">
+            <thead>
+                <tr>
+                    <th>Room ID</th>
+                    <th>Room Number</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                <tr>
+                    <td>{{ room.id }}</td>
+                    <td>{{ room.room_number }}</td>
+                    <td>{{ room.capacity }}</td>
+                    <td>{{ room.status }}</td>
+                    <td>
+                        <a href="" class="btn btn-secondary">Edit</a>
+                        <a href="" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No rooms available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No rooms available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

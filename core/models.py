@@ -41,12 +41,14 @@ class Room(models.Model):
     fee = models.DecimalField(max_digits=8, decimal_places=2)
 
     @property
-    def space_free(self):
-        try:
-            return self.capacity-self.occupied
-        except Exception as e:
-            print(e)
-            return ''
+    def status(self):
+        # try:
+        if self.capacity-self.occupied == 0:
+            return 'occupied'
+        # except Exception as e:
+        #     print(e)
+        #     return 'not occupied'
+        return 'not occupied'
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -64,7 +66,7 @@ class Payment(models.Model):
 class Complaint(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
     complaint_text = models.TextField()
-    status = models.CharField(max_length=10, choices=(('pending', 'Pending'), ('resolved', 'Resolved')))
+    status = models.CharField(max_length=10, choices=(('pending', 'Pending'), ('resolved', 'Resolved')), default='pending')
     date_filed = models.DateTimeField(auto_now_add=True)
     date_resolved = models.DateTimeField(null=True, blank=True)
 
